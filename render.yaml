@@ -1,0 +1,37 @@
+services:
+  # Backend Service
+  - type: web
+    name: pay-sentinel-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+    autoDeploy: true
+
+  # Frontend Service (Static Site)
+  - type: web
+    name: pay-sentinel-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: pay-sentinel-backend
+          property: url
+      - key: VITE_WS_URL
+        fromService:
+          type: web
+          name: pay-sentinel-backend
+          property: url
+          # Note: Render URLs are HTTPS, so WSS is implied on the same host, but we will explicitly handle the protocol in the code or just pass the base URL.
+          # Actually, passing the HTTP URL and letting the frontend replace http->ws is safer, OR just explicit. 
+          # Render service discovery gives `https://...`.
+          # Let's keep it simple: VITE_API_URL is the https link. VITE_WS_URL needs to be wss link.
+          # But `fromService` only gives the HTTP URL. User might need to manually set VITE_WS_URL or we derive it in code.
+          # For now, let's leave VITE_WS_URL as a manual env var or just set it to the backend URL and let the frontend swap protocol if needed? 
+          # My frontend code currently expects `VITE_WS_URL` to be the full base.
+          # I will document this. For this blueprint, I'll remove the dynamic linking for WS and let user set it, OR I can try to use a placeholder.

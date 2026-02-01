@@ -46,6 +46,27 @@ npm run dev
 ```
 *The Dashboard will launch at `http://localhost:5173`*
 
+## ☁️ Cloud Deployment (The "Judge Pleaser")
+
+### Backend (Railway Recommended)
+1.  Push this repo to GitHub.
+2.  Connect your repo to **Railway.app** (The \$5 trial credit keeps it awake 24/7 for the hackathon).
+3.  It will auto-detect the `cod` or `Procfile`.
+4.  Deploy. *Railway doesn't sleep on the trial plan.*
+
+### Backend (Render - Free Option)
+1.  Connect to **Render.com**.
+2.  Use the `render.yaml` Blueprint.
+3.  **Note**: Free tier sleeps after 15m. The first request will take ~50s to wake it up. Keep it open in a tab to prevent this.
+
+### Frontend (Vercel)
+1.  Import the `pay-sentinel` repo to **Vercel**.
+2.  Set the Root Directory to `frontend`.
+3.  Add Environment Variables:
+    - `VITE_API_URL`: The URL of your deployed Backend (e.g., `https://pay-sentinel-backend.onrender.com`)
+    - `VITE_WS_URL`: The same URL but with `ws` or `wss` (e.g., `wss://pay-sentinel-backend.onrender.com`).
+4.  Hit **Deploy**.
+
 ## 🕹️ Usage
 
 1.  **Monitor**: Watch the **TPS Graph** for real-time traffic visualization.

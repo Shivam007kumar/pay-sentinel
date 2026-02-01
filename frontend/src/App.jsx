@@ -14,6 +14,10 @@ const THEME = {
   }
 };
 
+// API Configuration
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8000';
+
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [graphData, setGraphData] = useState([]);
@@ -35,7 +39,7 @@ function App() {
 
   useEffect(() => {
     // Connect to WebSocket
-    const ws = new WebSocket('ws://localhost:8000/ws/stream');
+    const ws = new WebSocket(`${WS_URL}/ws/stream`);
 
     ws.onopen = () => {
       setIsConnected(true);
@@ -132,7 +136,7 @@ function App() {
   const triggerInjection = async () => {
     try {
       showToast('Injecting Chaos via API...', 'warning');
-      await fetch('http://localhost:8000/inject?issuer=CHASE', { method: 'POST' });
+      await fetch(`${API_URL}/inject?issuer=CHASE`, { method: 'POST' });
       addLog('System', 'INJECTING CHAOS SEQUENCE: TARGET [CHASE]', 'danger');
       showToast('Chaos Injected Successfully', 'success');
     } catch (e) {
@@ -144,7 +148,7 @@ function App() {
   const triggerRollback = async () => {
     try {
       showToast('Initiating Emergency Rollback...', 'warning');
-      const res = await fetch('http://localhost:8000/rollback', { method: 'POST' });
+      const res = await fetch(`${API_URL}/rollback`, { method: 'POST' });
       const data = await res.json();
       addLog('System', `ROLLBACK PROTOCOL: ${data.message} `, 'warning');
       showToast('Rollback Complete', 'success');
@@ -164,7 +168,7 @@ function App() {
     setIsChatLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/chat', {
+      const res = await fetch(`${API_URL}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: userMsg })

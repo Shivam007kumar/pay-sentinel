@@ -16,7 +16,10 @@ const THEME = {
 
 // API Configuration
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8000';
+
+// Automatically create the WebSocket URL based on the API URL
+// This handles local (http -> ws) and Production (https -> wss) automatically.
+const WS_URL = API_URL.replace(/^http/, 'ws');
 
 function App() {
   const [isConnected, setIsConnected] = useState(false);

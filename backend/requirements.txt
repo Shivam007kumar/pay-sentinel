@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+websockets
+# LangChain / OpenAI (Optional for Phase 1, but adding now)
+openai
+langchain
+langchain-openai

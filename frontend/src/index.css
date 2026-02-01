@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@theme {
+    --color-cyber-dark: #030712;
+    --color-cyber-purple: #8b5cf6;
+    --color-cyber-cyan: #06b6d4;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+    body {
+        background-color: var(--color-cyber-dark);
+        color: #e5e7eb;
+        /* App feels like a native tool */
+    }
+}
+
+@layer utilities {
+    .glass-panel {
+        @apply bg-gray-900/60 backdrop-blur-xl border border-white/20 shadow-xl;
+    }
+
+    .neon-text {
+        text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    }
+
+    .neon-border {
+        box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.3);
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(6, 182, 212, 0.3);
+        border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(6, 182, 212, 0.5);
+    }
+
+    .cyber-gradient-bg {
+        background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #030712 60%);
+    }
+}
+
+/* Custom Animation classes */
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.animate-scanline {
+    animation: scanline 8s linear infinite;
+}

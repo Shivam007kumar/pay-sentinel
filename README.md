@@ -2,6 +2,8 @@
 
 > "The Watcher on the Wall for your Transaction Stream."
 
+Live demo: [pay-sentinel.vercel.app](https://pay-sentinel.vercel.app/)
+
 PaySentinel is a next-gen autonomous agent system designed to monitor, analyze, and protect payment gateways in real-time. Built with a multi-agent architecture, it proactively detects anomalies, reasons about their root causes, and executes mitigation strategies without human intervention.
 
 ## 🏗️ Architecture
